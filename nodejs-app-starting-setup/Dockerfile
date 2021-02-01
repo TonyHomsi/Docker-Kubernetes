@@ -1,7 +1,7 @@
 FROM node
 
 WORKDIR /app
-## It is better to use COPY package.json /app in the begining and then RUN npm install
+## It is better to use COPY package.json /app in the begining gitand then RUN npm install
 COPY package.json /app
 
 RUN npm install
@@ -15,7 +15,7 @@ CMD ["node", "server.js"]
 ##To Excute Dockerfile:
 # docker build .
 # docker run -p 3000:80 <image>
-# docker ps // To see the running image
-# docker stop <name of the imgae>
+# docker ps // To see the running container
+# docker stop <name of the container>
 
 
