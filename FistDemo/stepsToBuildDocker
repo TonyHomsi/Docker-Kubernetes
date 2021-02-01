@@ -3,3 +3,7 @@
 3. docker run -p 3000:3000 78c8bc41c1489fb20d228f9103023b9135c493f25251e84bed7c38d75ea6b7c5
 4. docker ps //To list all the running container
 5. docker stop <name of the running container>
+
+// To install Pre built images
+1. for example: docker run node
+2. to interacte with the image: docker run -it node
