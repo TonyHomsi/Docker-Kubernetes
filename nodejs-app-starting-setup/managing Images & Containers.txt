@@ -1,0 +1,32 @@
+To list all the container
+    + docker ps
+
+To list all the container including the one is stopped
+    + docker ps -a
+
+To restart using the stop containers, simply run
+    + docker start <name of the container>
+
+To run the image.id with a container add (-d) Detached => 
+the result shows that you can stil type or run a command in the terminal  
+    + docker run -p 8000:80 -d <image.id>
+to disable this feature simply run:
+    + docker attach <name_container>
+
+To see all the log from the container
+    docker logs <name_container>
+But to see the exact running time what is going on add -f
+    docker logs -f <name_container>
+
+To restart the stop container in the attached mode 
+    docker start -a <name_container>
+
+##########################################################################
+By default, if you run a Container without -d, you run in "attached mode".
+
+If you started a container in detached mode (i.e. with -d), you can still attach to it afterwards without restarting the Container with the following command:
+
+docker attach CONTAINER
+attaches you to a running Container with an ID or name of CONTAINER.
+##########################################################################
+
