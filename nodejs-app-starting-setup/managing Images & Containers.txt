@@ -30,3 +30,23 @@ docker attach CONTAINER
 attaches you to a running Container with an ID or name of CONTAINER.
 ##########################################################################
 
+
+###############################################################
+To remove Containers and images
+1. Stop the container is running then
+ => docker rm <container_name>
+
+To remove images
+1. list the images that you have by: 
+ docker images
+2. docker rmi <image_id> .... // Note YOU must remove the container first (The unused one)
+Use --force to remove the images forcely 
+
+
+To remove the containers automatically:
+Once you run it and then stop it, it'll remove automatically
+docker run -p 3000:80 -d --rm <image_id> //It's not commom do that because you need then re-build the project
+
+
+To get information about the images
+docker image inspect <image_id>
