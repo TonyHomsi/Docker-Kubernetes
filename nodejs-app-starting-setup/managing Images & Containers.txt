@@ -50,3 +50,22 @@ docker run -p 3000:80 -d --rm <image_id> //It's not commom do that because you n
 
 To get information about the images
 docker image inspect <image_id>
+
+
+To add a new name for the container
+docker run -p 3000:80 -d --rm --name tony <image_id>
+
+Images Tags
+ name: Tag
+ex: 
+ node: 14 // 14:version
+
+or tun the command
+> docker build -t tony:latest .
+> docker images
+
+you can now the start rnning the container based on the new name image
+> docker run -p 3000:80 -d --rm --name eddy tony:latest
+
+to remove all the images including the tags:
+> docker image prune -a
