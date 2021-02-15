@@ -1,0 +1,20 @@
+To push an image to dockerhub
+1. create an account in dockerhub
+2. create a repositery
+3. > docker build -t <repositery_name> .   
+or you can use directly the existing one > docker images
+4. docker tag <old_name=node-demo:latest>  <repositery_name> 
+
+Check the new image
+
+5. then push the image to dockerhub
+> docker push tonyknightec21/node-hello-workd:tagname
+
+You need to login first :)
+
+To pull the image:
+> docker pull <repositery_name>
+or
+> docker run <repositery_name> 
+
+

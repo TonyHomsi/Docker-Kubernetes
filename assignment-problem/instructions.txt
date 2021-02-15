@@ -41,9 +41,17 @@ docker rm <container_name> <container_name> <container_name>
 
 To remove images
 docker images
-docker rmi <image_id>
+docker rmi <image_id> or docker image prune
+to remove all the images even if it has a tags docker image purne -a 
 
 5) Re-build the images - this time with names and tags assigned to them.
 
+docker build -t node-demo:latest .
+docker build -t bmi-app:1 .
+
+
 6) Run new containers based on the re-built images, ensuring that the containers
 are removed automatically when stopped.
+
+docker run -p 8000:3000 -d --name TONY --rm node-demo:latest
+docker run -it --name TonyPython --rm bmi-app:1
