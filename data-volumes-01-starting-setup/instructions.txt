@@ -5,3 +5,35 @@
 When you delete a container all the data that you stored or added will be removed! That is a problem!!
 The Solution is VOLUMES, 
 Volumes are folders on your host machine hard drive which are mounted(made available) into containers
+
+4. add to docker file
+VOLUME [ "/app/feedback" ]
+
+5. then re-build > docker build -t feedback:volumes .
+6. docker run -d -p 3000:80 --rm --name feedback-app feedback-node:volumes
+ something went wrong !!! 
+
+7. docker logs feedback-app
+
+8. modify server.js file
+
+9. repeat steps 5 & 6 
+
+To check our main problem is solved:
+10. docker stop container // the container should remove the data I have saved in the website but the volumes keep it :)
+11. docker run -d -p 3000:80 --rm --name feedback-app feedback-node:volumes
+
+// Still there is a problem :D :D
+There are two types of External Data Storages:
+ a. Volumes (managed by Docker)
+ b. Bind Mounts (Managed by me)
+
+ To fix this:
+ stop the container then remove the image and rebuild again! > docker build -t feedback-node:volumes .
+ Now the run the container but add some other flags
+ > docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+
+
+
+ Now you just start piling up a bunch of unused anonymous volumes - 
+ you can clear them via > docker volume rm VOL_NAME or > docker volume prune
