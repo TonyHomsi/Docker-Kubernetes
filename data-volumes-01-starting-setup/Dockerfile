@@ -14,4 +14,4 @@ EXPOSE 80
 # VOLUME [ "/app/feedback" ] remove it and build it in the terminal! Check the instruction
 
 # You can add [" /app/node_modules"]
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
