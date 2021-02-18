@@ -6,6 +6,7 @@ COPY package.json .
 
 RUN npm install
 
+# We could remove COPY . . if we are using the bind mount
 COPY . .
 
 EXPOSE 80
