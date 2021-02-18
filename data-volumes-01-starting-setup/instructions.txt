@@ -86,3 +86,8 @@ modify dokcer file & server.js and then build docker file  & run the container(a
 After adding .env file you can change the command above as the following:
 docker run -d -p 3000:8000 --env-file ./.env --rm --name feedback-app -v feedback:/app/feedback -v 
 "my_path_without_fileName.js:/app:ro" -v /app/node_moduusles -v /app/temp feedback-node:env
+
+
+Working with ARGument:
+modify docker file:
+>docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
