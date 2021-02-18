@@ -57,3 +57,20 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v
 
 **********NOTE*********************
 Run the command above using CMD NOT BASH
+
+Create Read only Volumes :ro and add -v /app/temp to make sure it really overwrite this bind mount
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback 
+-v "my_path_without_fileName.js:/app:ro" -v /app/node_modules -v /app/temp feedback-node:volumes
+
+To see the list of volumes:
+> docker volume ls
+
+Create your own volume
+> docker volume create feedback-file
+
+Inspect volume to get more information
+> docker volume inspect <volume_name>
+
+Prune or delete volume the stopped one, you should stop the container in order to remove the volume:
+> docker volume rm <volume_name>
+> docker volume prune <volume_name>
