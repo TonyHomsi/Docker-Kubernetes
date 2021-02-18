@@ -74,3 +74,15 @@ Inspect volume to get more information
 Prune or delete volume the stopped one, you should stop the container in order to remove the volume:
 > docker volume rm <volume_name>
 > docker volume prune <volume_name>
+
+
+To create ENViroment variable to our application
+modify dokcer file & server.js and then build docker file  & run the container(adding :env at the end of the command) :
+1:> docker build -t feedback-node:env .
+2:> docker run -d -p 3000:80 --env PORT=8000 --rm --name feedback-app -v feedback:/app/feedback -v 
+"my_path_without_fileName.js:/app:ro" -v /app/node_modules -v /app/temp feedback-node:env
+
+
+After adding .env file you can change the command above as the following:
+docker run -d -p 3000:8000 --env-file ./.env --rm --name feedback-app -v feedback:/app/feedback -v 
+"my_path_without_fileName.js:/app:ro" -v /app/node_moduusles -v /app/temp feedback-node:env

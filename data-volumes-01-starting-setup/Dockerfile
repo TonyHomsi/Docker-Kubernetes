@@ -9,7 +9,9 @@ RUN npm install
 # We could remove COPY . . if we are using the bind mount
 COPY . .
 
-EXPOSE 80
+ENV PORT 80
+
+EXPOSE $PORT
 
 # here is where our data stored and survived
 # VOLUME [ "/app/feedback" ] remove it and build it in the terminal! Check the instruction
