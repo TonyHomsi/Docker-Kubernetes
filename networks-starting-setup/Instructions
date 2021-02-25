@@ -1,0 +1,13 @@
+Let's build our app:
+1- docker build -t favorites-node .
+2- docker run --name favorites -d --rm -p 3000:3000 favorites-node
+
+Nothing happens !! What's wrong about that!
+Remove -d from the docker run to see what exactly the problem is!! => 
+"MongoNetworkError: failed to connect to server [localhost:27017] on first connect"
+
+Uncomment the part of MongoDB connect in app.js but keep app.listen(3000)
+
+test your app using postman! it works fine (localhost:3000/people)!
+
+### Re comment the part of MongoDB! ###
