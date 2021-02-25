@@ -1,3 +1,5 @@
+1. CASE Container communicate to WWW
+
 Let's build our app:
 1- docker build -t favorites-node .
 2- docker run --name favorites -d --rm -p 3000:3000 favorites-node
@@ -10,8 +12,21 @@ Uncomment the part of MongoDB connect in app.js but keep app.listen(3000)
 
 test your app using postman! it works fine (localhost:3000/people)!
 
+
+2. CASE Contaienr communicate to localhost (MongoDB)
 ### Re comment the part of MongoDB! ###
 
 Modify app.js with special domain to allow docker to connect to mongoDB
  rebuild the image again and run the container .. probebly you could get the same error
  that you are not able to connect to MongoDB server! Later you'll fix this error!
+
+
+3. CASE container communicate to another container
+ a. docker run -d --name mongodb mongo
+ b. docker container inspect mongodb
+ interseting information to see including ip address under network settings
+  then change host.docker.internal to the given ip address
+
+  
+  c. docker build -t favorites-node .
+  d. docker run --name favorites -d --rm -p 3000:3000 favorites-node
