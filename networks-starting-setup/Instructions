@@ -11,3 +11,7 @@ Uncomment the part of MongoDB connect in app.js but keep app.listen(3000)
 test your app using postman! it works fine (localhost:3000/people)!
 
 ### Re comment the part of MongoDB! ###
+
+Modify app.js with special domain to allow docker to connect to mongoDB
+ rebuild the image again and run the container .. probebly you could get the same error
+ that you are not able to connect to MongoDB server! Later you'll fix this error!
