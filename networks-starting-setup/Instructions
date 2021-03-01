@@ -30,3 +30,13 @@ Modify app.js with special domain to allow docker to connect to mongoDB
   
   c. docker build -t favorites-node .
   d. docker run --name favorites -d --rm -p 3000:3000 favorites-node
+
+
+
+  ####### Creating Docker Network: Containers can Communicate with each other and IPs are
+  automatically resolved ########
+
+  1. docker network create favorites-net
+   a. docker network ls
+  2. Build the image: docker build -t favorites-node .
+  3. docker run -d --name favorites --network favorites-net -d --rm -p 3000:3000 favorites-node
