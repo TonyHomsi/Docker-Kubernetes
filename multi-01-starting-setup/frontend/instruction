@@ -1,0 +1,9 @@
+Create a docker file.
+
+docker build -t goals-react . 
+docker run --name goals-frontend --rm -d -p 3000:3000 goals-react
+
+there's something went wrong! let's run it without detached mode and interacting mode
+docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+
+Now it run correclty
