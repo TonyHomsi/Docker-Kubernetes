@@ -63,7 +63,7 @@ docker run --name goals-backend --rm -p 80:80 --network goals-net goals-node
 
 
 
-##### Live Source Code update ####
+##### Live Source Code update for Node ####
 1. docker stop goals-backend
 2. docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -d --rm -p 80:80 --network goals-net goals-node
 
@@ -87,4 +87,8 @@ Stop the docker goals-backend
 build and re-run the container
 
 docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=Tony -d --rm -p 80:80 --network goals-net goals-node
+
+
+### Live Source Update for the React Container #### 
+Check the instruction in the frondend folder! :)
 

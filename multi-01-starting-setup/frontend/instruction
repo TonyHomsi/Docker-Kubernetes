@@ -7,3 +7,8 @@ there's something went wrong! let's run it without detached mode and interacting
 docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
 
 Now it run correclty
+
+##### Live Source Code update for React Frontend ####
+docker run -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\frontend\src":/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
+
+Windows user should follow this article(Access Linux filesystems in Windows and WSL 2) to see live update
