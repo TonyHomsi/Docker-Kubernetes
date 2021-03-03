@@ -60,3 +60,31 @@ and Volume will help to fix this issue!
 rebuild the image again:
 docker build -t goals-node .
 docker run --name goals-backend --rm -p 80:80 --network goals-net goals-node
+
+
+
+##### Live Source Code update ####
+1. docker stop goals-backend
+2. docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -d --rm -p 80:80 --network goals-net goals-node
+
+Even it does work well but still when the container starts we run the node command and that locks in the code
+at the point this container starts, so if do any change in the source code we will not have any impact!
+
+We want the node sercer to restart, whenever the code changes!
+Delete package.lock.json and add nodemon in the package.json and do CMD in the docker FAILED
+
+
+Build the image again:
+docker build -t goals-node .
+
+docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules --rm -p 80:80 --network goals-net goals-node
+
+let's do any simple changes in the app.js and we notice the server restart automatically 
+
+### You can add ENV in docker file to fix the user name and password in the mongodb connection in app.js
+
+Stop the docker goals-backend
+build and re-run the container
+
+docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=Tony -d --rm -p 80:80 --network goals-net goals-node
+

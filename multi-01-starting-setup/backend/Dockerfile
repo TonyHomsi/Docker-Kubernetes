@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["node", "app.js"]
+ENV MONGODB_USERNAME=Tony
+ENV MONGODB_PASSWORD=secure
+
+CMD ["npm", "start"]
