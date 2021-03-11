@@ -1,0 +1,94 @@
+
+########## Adding Docker Networks for Efficient Cross-Container Communication ########
+1. docker network create goals-net
+2. docker run --name mongodb --rm -d -p 27017:27017 mongo // You don't need to publish the -p 27017:27017 
+because they are in the same network ==>
+2. docker run --name mongodb --rm -d --network goals-net mongo
+
+Let's go to the backend direction:
+1. docker run --name goals-backend --rm -d -p 80:80 goals-node //You don't need to publish the -p 27017:27017 
+because they are in the same network ==>
+1. docker run --name goals-backend --rm -d --network goals-net goals-node
+// It'll fail because app.js has a connection to host.docker.internal not to a port ==>
+mongoose.connect(
+  'mongodb://mongodb:27017/course-goals',
+  {
+
+Build the image again:
+1. docker build -t goals-node . then run 
+2. docker run --name goals-backend --rm -d --network goals-net mongo
+
+Now Go to the frontend part and change the App.js from 'http://localhost/goals to 'http://goals-backend/goals
+
+then rebuild the image: 
+1. docker build -t goals-react .
+2. docker run --name goals-frontend --network goals-net --rm -d -p 3000:3000 -it goals-react
+Something went wrong!
+
+React works on the browser not on the server side like mongoDB, to fix this let's go back to App.js
+then: 
+1. docker build -t goals-react . 
+// Remove --network goal-net because it's doesn't make sence
+2. docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+Go back to backend part and stop the container goals-backend then run and publish -p 80:80
+docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
+
+##########
+If we stop the container and re-run it again, we know notice that our data is removed 
+and not stored (because the container will be removed once you stop it), so we need to find a way that store our data temprorly!
+and Volume will help to fix this issue!
+
+
+1. docker run --name mongodb -v data:/data/db --rm -d --network goals-net mongo
+2. Adding security:
+ a. docker stop mongodb
+ b. docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=Tony -e MONGO_INITDB_ROOT_PASSWORD=secure mongo
+  FAILED because the connection in MongoDB(app.js) has a different link!
+ mongoose.connect(
+  'mongodb://mongodb:27017/course-goals',
+  {
+
+      ====>>>
+
+      mongoose.connect(
+  'mongodb://Tony:secure@mongodb:27017/course-goals',
+  {
+
+    then stop: docker stop goals-backend
+
+rebuild the image again:
+docker build -t goals-node .
+docker run --name goals-backend --rm -p 80:80 --network goals-net goals-node
+
+
+
+##### Live Source Code update for Node ####
+1. docker stop goals-backend
+2. docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -d --rm -p 80:80 --network goals-net goals-node
+
+Even it does work well but still when the container starts we run the node command and that locks in the code
+at the point this container starts, so if do any change in the source code we will not have any impact!
+
+We want the node sercer to restart, whenever the code changes!
+Delete package.lock.json and add nodemon in the package.json and do CMD in the docker FAILED
+
+
+Build the image again:
+docker build -t goals-node .
+
+docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules --rm -p 80:80 --network goals-net goals-node
+
+let's do any simple changes in the app.js and we notice the server restart automatically 
+
+### You can add ENV in docker file to fix the user name and password in the mongodb connection in app.js
+
+Stop the docker goals-backend
+build and re-run the container
+
+docker run --name goals-backend -v "C:\Users\Antoi\OneDrive\Documents\Docker\multi-01-starting-setup\backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=Tony -d --rm -p 80:80 --network goals-net goals-node
+
+
+### Live Source Update for the React Container #### 
+Check the instruction in the frondend folder! :)
+

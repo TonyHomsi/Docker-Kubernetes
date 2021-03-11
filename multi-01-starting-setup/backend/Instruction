@@ -1,0 +1,29 @@
+Run node app.js in the backend part
+Run npm start in the frontend part
+
+Dockerizing the MongoDB Service
+
+1. docker run --name mongodb --rm -d -p 27017:27017 mongo
+2. stop the backend then re-run it again
+ a. docker logs mongodb: to check if the frontend connected to the backend
+
+Build the image based on the dockerfile!
+
+1. docker build -t goals-node .
+2. docker run --name goals-backend --rm goals-node
+
+FAILED TO CONNECT TO MONGODB
+
+Change the app.js as following:
+mongoose.connect(
+  'mongodb://host.docker.internal:27017/course-goals',
+  {....
+  ...
+
+rebuild this image and then run the container! Wow CONNECTED TO MONGODB
+
+BUT still there's a problem that the backend can't connect to frontend
+1. stop the container goals-backend and re run the container with detached mode:
+docker run --name goals-backend --rm -d -p 80:80 goals-node
+
+NOW EVERYTHING WORKS FINE!
