@@ -5,3 +5,6 @@ To run Yaml filem start and create container:
 To stop Yaml file:
     docker-compose down
     to delete the volumes add -v
+
+To check if the mongoDB is connected
+- docker logs <container_name>
