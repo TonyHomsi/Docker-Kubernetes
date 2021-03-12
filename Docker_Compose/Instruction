@@ -1,0 +1,7 @@
+To run Yaml filem start and create container:
+    docker-compose up
+    with detached mode add -detached
+
+To stop Yaml file:
+    docker-compose down
+    to delete the volumes add -v
