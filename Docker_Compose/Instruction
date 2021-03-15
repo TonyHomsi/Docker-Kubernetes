@@ -8,3 +8,6 @@ To stop Yaml file:
 
 To check if the mongoDB is connected
 - docker logs <container_name>
+
+if you want to just build any custom images:
+ Docker-compose build
