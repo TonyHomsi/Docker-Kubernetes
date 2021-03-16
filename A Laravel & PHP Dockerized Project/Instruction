@@ -35,3 +35,12 @@
 adding entrypoint will overwrite the entrypoint in the docker file and if it's not exist will add it
 make sure all the containers are running then:
 >docker-compose run --rm artisan migrate
+
+
+#Bind Monnt and COPY conecpt:
+1. Modify php.dockerfile and docker-compose.yaml
+2. docker-compose up -d --build server
+3. add "RUN chown -R www-data:www-data /var/www/html" in the php.dockerfile
+4. docker-compose down
+5. docker-compose up -d --build server
+
