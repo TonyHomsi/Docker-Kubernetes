@@ -1,0 +1,8 @@
+# Adding a Nginx (web Server) container
+1. Add it in the docker-compose file!
+2. Add Nginx.conf file
+
+# Adding a PHP container
+1. Add it in the docker-compose file!
+2. Add php.dockerfile file
+3. add src folder then add volumes in the docker-compose file/ delegated is used to improve the performance
