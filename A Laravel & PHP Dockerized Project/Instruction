@@ -6,3 +6,27 @@
 1. Add it in the docker-compose file!
 2. Add php.dockerfile file
 3. add src folder then add volumes in the docker-compose file/ delegated is used to improve the performance
+
+# Adding a mySQl container
+1. Add it in the docker-compose file!
+2. Add mysql.env file
+
+
+# Adding a composer utility container
+
+
+#Creating a Laravel App via the composer utility container
+1. we can run the composer container indvidually via the command then add the command to create laravel project:
+ > docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+
+# Lunching Only some Docker compose Service
+1. env file from src/env which is produced after running the command above
+2. add extra volume in the server ./src:/var/www/html
+3. docker-compose up -d server php mysql // Not all the containers work(i.e. server)!
+4. docker-compose file: change the wrong path from (/etc/nginx/nginx.conf:ro)  to (/etc/nginx/conf.d/default.conf:ro)
+5. docker-compose down
+6. docker-compose up -d server php mysql
+7. then add depend_on to the docker-compose file:
+8. docker-compose down
+9. docker-compose up -d server
+9.a docker-compose up -d --build server // to force docker-compose to rebuild image in the dockerfile if something change!
