@@ -1,0 +1,32 @@
+docker build -t node-dep-example .
+docker run -d --rm --name node-dep -p 80:80 node-dep-example
+
+
+Installing Docker on Virtual Machine (AWS)
+in the amazon terminal connection:
+[ec2-user@ip-***-**-***-*** ~]$
+- sudo yum update -y
+- sudo amazon-linux-extras install docker
+- sudo service docker start
+then you can run docke commands:
+
+
+Pushing local image to the cloud
+two options:
+1. deploy source code
+2. Deploy Built image
+
+
+Create a repository in Docker-hub, name the repository node-example-docker then
+
+docker build -t node-dep-example-1 .
+docker tag node-dep-example-1 tonyhomsi/node-example-docker
+docker push tonyhomsi/node-example-docker
+
+in the amazon terminal:
+[ec2-user@ip-***-**-***-*** ~]$
+sudo docker run -d --rm -p 80:80 tonyhomsi/node-example-docker
+sudo docker push
+
+Go to AWS and copy the public ip address --> go to security Group --> Edit inbound rule --> Type(HTTP) & Source (anywhere)
+then copy public ip address and paste it in the browser!
