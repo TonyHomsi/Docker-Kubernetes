@@ -30,3 +30,27 @@ sudo docker push
 
 Go to AWS and copy the public ip address --> go to security Group --> Edit inbound rule --> Type(HTTP) & Source (anywhere)
 then copy public ip address and paste it in the browser!
+
+### Managing and Updating the container/image ####
+
+Change Welcome.html file to see the reflect in the remote server! and to do so:
+1. rebuild the image:
+docker build -t node-dep-example-1 .
+docker tag node-dep-example-1 tonyhomsi/node-example-docker
+docker push tonyhomsi/node-example-docker
+
+in the amazon terminal:
+[ec2-user@ip-***-**-***-*** ~]$
+sudo docker ps
+sudo docker stop <name of the container>
+sudo docker run -d --rm -p 80:80 tonyhomsi/node-example-docker
+
+NO CHANGE ATT ALL!!!
+
+sudo docker pull tonyhomsi/node-example-docker
+sudo docker stop <name of the container> then run:
+sudo docker run -d --rm -p 80:80 tonyhomsi/node-example-docker 
+
+
+NOW IT WORKS!
+Stop the container and delete the instanse server on AWS
