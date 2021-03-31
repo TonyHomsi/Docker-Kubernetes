@@ -27,3 +27,10 @@ Add the new enviroment in Dockerfile and backend.env
 because we our now in the cloud we don't need our mongodb service in the docker-compose.yaml file
 
 Run: docker-compose up
+
+
+####### Building a Multi-Stage image #######
+After adding Dockerfile.prod. modifying app.js and creating a new repositery for frontend, run:
+
+docker build -f frontend/Dockerfile.prod -t tonyhomsi/goals-react ./frontend
+docker push tonyhomsi/goals-react
