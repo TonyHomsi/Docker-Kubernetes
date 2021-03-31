@@ -18,3 +18,12 @@ docker build -t goals-node ./backend
 then create a new repositery in docker hub "goals-node"
 docker tag goals-node tonyhomsi/goals-node
 docker push tonyhomsi/goals-node
+
+
+###### Moving to MongoDB Atlas ##########
+Modify app.js according to the created cluster on Atlas!
+Add the new enviroment in Dockerfile and backend.env
+
+because we our now in the cloud we don't need our mongodb service in the docker-compose.yaml file
+
+Run: docker-compose up
