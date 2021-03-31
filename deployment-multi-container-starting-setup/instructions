@@ -1,0 +1,20 @@
+We need to change the app.js file in this part:
+mongoose.connect(
+  `.......@mongodb:27017/course-goals?authSource=admin`,
+  {
+      to:
+
+mongoose.connect(
+  `.......@${process.env.MONGODB_URL}:27017/course-goals?authSource=admin`,
+  {
+
+then in the backend.env and dockerfile add:
+MONGODB_URL=mongodb
+
+
+Now let's build the image:
+docker build -t goals-node ./backend
+
+then create a new repositery in docker hub "goals-node"
+docker tag goals-node tonyhomsi/goals-node
+docker push tonyhomsi/goals-node
