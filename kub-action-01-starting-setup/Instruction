@@ -24,3 +24,19 @@ It works
 
 To check more:
 minikube dashboard
+
+
+############# The "Service" Object #############
+We need to create a service in order to make the IP address for the pod available 
+
+Let's run minikube dashboard, then open a new terminal
+
+kubectl expose deployment first-app --type=LoadBalancer --port=8080
+
+check if it works: 
+ kubectl get services
+
+ we don't have an external IP address to reach pods outside, so:
+ minikube service first-app,
+
+ It works correctly and perfectly on the web browser!
