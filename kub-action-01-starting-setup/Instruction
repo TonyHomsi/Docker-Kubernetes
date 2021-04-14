@@ -19,7 +19,7 @@ b. docker push tonyhomsi/kub-first-app
 
 then run:kubectl create deployment first-app --image=tonyhomsi/kub-first-app
 
-now check: kubectl get pods.
+now check: kubectl get pods
 It works
 
 To check more:
@@ -40,3 +40,10 @@ check if it works:
  minikube service first-app,
 
  It works correctly and perfectly on the web browser!
+
+
+ ### The container in the pod is being monitored and if it's fails, it'll restart ##
+
+ We could assign how many times(3) we would like to restart our container:
+ kubectl scale deployment/first-app --replicas=3
+ kubectl get pods
