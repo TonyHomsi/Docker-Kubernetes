@@ -47,3 +47,22 @@ check if it works:
  We could assign how many times(3) we would like to restart our container:
  kubectl scale deployment/first-app --replicas=3
  kubectl get pods
+
+
+#### Updating the deployment #####
+let's do some changes in app.js file
+we need to update our image:
+1. docker build -t tonyhomsi/kub-first-app .
+2. kubectl get deployments
+3. docker push tonyhomsi/kub-first-app
+
+to update the deployment:
+> kubectl set image deployment/first-app kub-first-app=tonyhomsi/kub-first-app 
+where:kub-first-app is the <image_name>
+> minikube dashboard 
+There are no different! to do so we need to add a tag when we build our image, for example:
+docker build -t tonyhomsi/kub-first-app:2 .
+docker push tonyhomsi/kub-first-app:2
+kubectl set image deployment/first-app kub-first-app=tonyhomsi/kub-first-app:2
+
+kubectl rollout status deployment/first-app
