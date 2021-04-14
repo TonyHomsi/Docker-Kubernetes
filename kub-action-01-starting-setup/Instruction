@@ -1,0 +1,26 @@
+1. docker build -t kub-first-app .
+
+2. minikube status if it is offline "minikube start"
+
+3. kubectl help
+
+4. kubectl create deployment first-app --image=kub-first-app
+5 let's check if it works! (not ready) 
+    kubectl get deployments or using kubectl get pods
+it doesn't work correctly
+
+6. we need to delete the deployment first
+kubectl delete deployment first-app
+
+To do so, we should create a repository in docker hub
+==> tonyhomsi/kub-first-app, then
+a. docker tag kub-first-app tonyhomsi/kub-first-app
+b. docker push tonyhomsi/kub-first-app
+
+then run:kubectl create deployment first-app --image=tonyhomsi/kub-first-app
+
+now check: kubectl get pods.
+It works
+
+To check more:
+minikube dashboard
