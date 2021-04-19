@@ -66,3 +66,21 @@ docker push tonyhomsi/kub-first-app:2
 kubectl set image deployment/first-app kub-first-app=tonyhomsi/kub-first-app:2
 
 kubectl rollout status deployment/first-app
+
+## let's try something to see how it fails###
+let's try to update deployment with using an image that is not exist
+kubectl set image deployment/first-app kub-first-app=tonyhomsi/kub-first-app:3
+kubectl rollout status deployment/first-app
+to fix that we need to rollback
+kubectl get pods
+kubectl rollout undo deployment/first-app
+kubectl get pods
+
+it's gone
+
+But if we would like to go to old deployment and use it:;
+> kubectl rollout history deployment/first-app then:
+> kubectl rollout history deployment/first-app --revision=3
+
+Now to use specific and old one: 
+kubectl rollout undo deployment/first-app --to-revision=1
