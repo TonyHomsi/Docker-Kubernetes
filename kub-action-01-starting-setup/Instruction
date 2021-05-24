@@ -1,6 +1,6 @@
 1. docker build -t kub-first-app .
 
-2. minikube status if it is offline "minikube start"
+2. minikube status if it is offline run: "minikube start --driver=docker"
 
 3. kubectl help
 
@@ -37,7 +37,7 @@ check if it works:
  kubectl get services
 
  we don't have an external IP address to reach pods outside, so:
- minikube service first-app,
+ minikube service first-app
 
  It works correctly and perfectly on the web browser!
 
@@ -84,3 +84,10 @@ But if we would like to go to old deployment and use it:;
 
 Now to use specific and old one: 
 kubectl rollout undo deployment/first-app --to-revision=1
+
+To delete our service:
+kubectl delete service first-app
+
+
+To delete our deployment:
+kubectl delete deployment first-app
