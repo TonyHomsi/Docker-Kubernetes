@@ -20,3 +20,18 @@ kubectl apply -f=master-deployment.yaml
 now run:
 minikube service backend
 
+
+Now adding lables to both files dep & service
+  labels:
+    group: example
+
+delete the master-deployment:
+kubectl delete -f=master-deployment.yaml
+
+now create them again:
+kubectl apply -f=deployment.yaml -f=service.yaml
+
+
+Now delete them using labels:
+kubectl delete -l group=example for more security use this command as following:
+kubectl delete deployments,services -l group=example
