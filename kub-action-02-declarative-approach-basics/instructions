@@ -35,3 +35,20 @@ kubectl apply -f=deployment.yaml -f=service.yaml
 Now delete them using labels:
 kubectl delete -l group=example for more security use this command as following:
 kubectl delete deployments,services -l group=example
+
+#########################
+Adding liveness Probs:
+      containers:
+        - name: second-node
+          image: tonyhomsi/kub-first-app:2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            initialDelaySeconds: 5
+
+now lets run:
+kubectl apply -f=deployment.yaml -f=service.yaml
+minikube service backend
+
