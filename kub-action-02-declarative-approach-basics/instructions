@@ -1,0 +1,4 @@
+After adding deplyment.yaml file, run:
+kubectl apply -f=deployment.yaml
+check: kubectl get deployments
+check: kubectl get pods
