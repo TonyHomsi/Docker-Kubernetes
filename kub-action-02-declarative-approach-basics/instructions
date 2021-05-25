@@ -2,3 +2,21 @@ After adding deplyment.yaml file, run:
 kubectl apply -f=deployment.yaml
 check: kubectl get deployments
 check: kubectl get pods
+
+Now let add service.yaml file!
+kubectl apply -f service.yaml
+kubectl get services
+now we can expose it by:
+minikube service backend
+
+
+delete the deployment & service:
+
+kubectl delete -f=deployment.yaml -f=service.yaml
+
+we can merge two yaml files, ex: master-deployment.yaml, then run
+kubectl apply -f=master-deployment.yaml
+
+now run:
+minikube service backend
+
