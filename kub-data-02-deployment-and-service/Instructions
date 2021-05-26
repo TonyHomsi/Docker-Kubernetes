@@ -57,3 +57,11 @@ then run: kubectl apply -f=deployment.yaml
 
 ################### Defining Persistent Volume ############################
 Add two files host-pv & host-pvc and edit the deployment-file
+
+kubectl apply -f=host-pv.yaml
+kubectl apply -f=host-pvc.yaml
+kubectl apply -f=deployment.yaml
+
+kubectl get pv
+kubectl get pvc
+kubectl get deployments
