@@ -2,3 +2,26 @@ Create a new repository on Docker-hub: tonyhomsi/kuber-data-demo
 run and build docker file:
 docker build -t tonyhomsi/kuber-data-demo .
 docker push tonyhomsi/kuber-data-demo
+
+run minikube:
+minikube start --driver=docker
+check that by using minikube status
+
+now run:
+kubectl apply -f=service.yaml -f=deployment.yaml
+kubectl get deployments
+minikube service story-service
+
+######################### Adding Volumes #######################
+
+In the app.js, add the following:
+app.get('/error', () => {
+  process.exit(1)
+})
+
+then rerun docker commands
+docker build -t tonyhomsi/kuber-data-demo:1 .
+docker push tonyhomsi/kuber-data-demo:1
+
+then you should edit it in the deployment, then:
+kubectl apply -f=deployment.yaml

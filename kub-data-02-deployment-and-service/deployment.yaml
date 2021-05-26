@@ -14,4 +14,10 @@ spec:
     spec:
       containers:
         - name: story
-          image: tonyhomsi/kuber-data-demo
+          image: tonyhomsi/kuber-data-demo:1
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          emptyDir: {}
