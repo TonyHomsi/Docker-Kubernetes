@@ -1,0 +1,4 @@
+Create a new repository on Docker-hub: tonyhomsi/kuber-data-demo
+run and build docker file:
+docker build -t tonyhomsi/kuber-data-demo .
+docker push tonyhomsi/kuber-data-demo
