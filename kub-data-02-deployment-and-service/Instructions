@@ -65,3 +65,26 @@ kubectl apply -f=deployment.yaml
 kubectl get pv
 kubectl get pvc
 kubectl get deployments
+
+
+################## Using Environment Variables #########################
+Edit the deployments file by adding the following:
+env:
+    - name: STORY_FOLDER
+      value: 'story'
+
+Edit app.js file.
+
+docker build -t tonyhomsi/kuber-data-demo:2 .
+docker push tonyhomsi/kuber-data-demo:2
+then:
+kubectl apply -f=deployment.yaml
+
+
+############# Creating ConfigMap ##################
+Create a file environment.yaml file then:
+kubectl apply -f=environment.yaml
+kubectl get configmap
+
+Edit the deployment.yaml file according to the new environment.yaml file, then run:
+kubectl apply -f=deployment.yaml
