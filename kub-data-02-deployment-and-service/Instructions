@@ -25,3 +25,35 @@ docker push tonyhomsi/kuber-data-demo:1
 
 then you should edit it in the deployment, then:
 kubectl apply -f=deployment.yaml
+kubectl get pods
+
+now edit the deployment file as following:
+containers:
+        - name: story
+          image: tonyhomsi/kuber-data-demo:1
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          emptyDir: {}
+
+then run:
+kubectl apply -f=deployment.yaml
+
+##############
+Adding two pods, by changing the number of replicas.
+in the deployment file change it to 2, then run:
+kubectl apply -f=deployment.yaml
+kubectl get pods (two pods) but our data are lost when we check that in postman... In order to fix that, change the volume:
+
+volumes:
+        - name: story-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
+
+then run: kubectl apply -f=deployment.yaml
+
+################### Defining Persistent Volume ############################
+Add two files host-pv & host-pvc and edit the deployment-file
