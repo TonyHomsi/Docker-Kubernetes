@@ -16,3 +16,38 @@ kubectl apply -f=users-deployment.yaml
 
 Add User-service.yaml file and run:
 kubectl apply -f=users-service.yaml and to access it you need to run minikube service users-service
+
+
+###################################### Multiple Container in One Pod ##################################
+let's go back to users.app.js and change the 
+const hashedPW = await axios.get('http://auth/hashed-password/' + password);  ==>
+const hashedPW = await axios.get(`http://${process.env.AUTH_ADDRESS}/hashed-password/` + password);
+
+Now let's go to docker-compose and modify the file by adding environment:
+users:
+    build: ./users-api
+    environment:
+      AUTH_ADDRESS: auth
+
+
+now move to the auth-api dirc and create a new repository on Docker-hub and run:
+docker build -t tonyhomsi/kub-demo-auth . 
+docker push tonyhomsi/kub-demo-auth
+
+now add the new image to the user-deployment.yaml:
+- name: auth
+        image: tonyhomsi/kub-demo-auth:latest
+
+then go to users-api dirc
+and run:
+docker build -t tonyhomsi/kub-demo-user . 
+docker push tonyhomsi/kub-demo-user
+
+edit the user-deployment file by adding:
+ env:
+    - name: AUTH_ADDRESS
+      value: localhost
+
+then go to kubernetes dir and run:
+kubectl apply -f=users-deployment.yaml
+kubectl get pods

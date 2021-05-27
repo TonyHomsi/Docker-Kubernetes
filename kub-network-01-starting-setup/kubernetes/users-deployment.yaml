@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deployment
+  name: users-deployment
 spec:
   replicas: 1
-  selector:
+  selector: 
     matchLabels:
       app: users
   template:
@@ -13,11 +13,10 @@ spec:
         app: users
     spec:
       containers:
-      - name: users
-        image: tonyhomsi/kub-demo-user
-        #resources:
-         # limits:
-          #  memory: "128Mi"
-           # cpu: "500m"
-        #ports:
-        #- containerPort: <Port>
+        - name: users
+          image: tonyhomsi/kub-demo-user:latest
+          env:
+            - name: AUTH_ADDRESS
+              value: localhost
+        - name: auth
+          image: tonyhomsi/kub-demo-auth:latest
