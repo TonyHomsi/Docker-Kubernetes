@@ -13,3 +13,6 @@ docker push tonyhomsi/kub-demo-user
 
 Now add user-deployment.yaml file and run:
 kubectl apply -f=users-deployment.yaml
+
+Add User-service.yaml file and run:
+kubectl apply -f=users-service.yaml and to access it you need to run minikube service users-service
