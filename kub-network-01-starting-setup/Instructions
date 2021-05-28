@@ -51,3 +51,38 @@ edit the user-deployment file by adding:
 then go to kubernetes dir and run:
 kubectl apply -f=users-deployment.yaml
 kubectl get pods
+
+############### Creating Multiple Deployments #################
+Create auth-deployments and auth-service files
+
+But how to make these two pods to communicate with each others!
+
+let's be on kubernetes dirc, then run:
+kubectl apply -f=auth-service.yaml -f=auth-deployment.yaml
+kubectl get services
+
+
+change the users-deployment.yaml file as following:
+ env:
+            - name: AUTH_ADDRESS
+              value: "10.96.232.143"
+where the value getting from the "kubectl get services" it's annoying to get the ip address manually!
+
+then run: kubectl apply -f=users-deployment.yaml
+kubectl get pods
+
+using postman to check if it works!
+
+## it's annoying to get the ip address manually!##
+to fix that we can use AUTH_SERVICE_SERVICE_HOST and replace it in the app.js file and then add it in docker-compose.
+
+then go to user-api and run:
+docker build -t tonyhomsi/kub-demo-user . 
+docker push tonyhomsi/kub-demo-user
+
+Now go to kubernetes folder:
+delete the old one:
+kubectl delete -f=users-deployment.yaml
+kubectl apply -f=users-deployment.yaml
+kubectl get pods
+
