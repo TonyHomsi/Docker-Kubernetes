@@ -154,7 +154,11 @@ kubectl delete -f=tasks-deployment.yaml
 kubectl apply -f=tasks-deployment.yaml
 
 
-
-
-
+##### Deploying the frontend with kubernetes #######
+Create frontend(deployment & service).yaml files and then run:
+docker push tonyhomsi/kub-demo-frontend
+kubectl apply -f=frontend-service.yaml -f=frontend-deployment.yaml
+kubectl get pods
+kubectl get service
+minikube service frontend-service
 
