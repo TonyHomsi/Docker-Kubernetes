@@ -98,3 +98,29 @@ env:
 then run:
 kubectl apply -f=users-deployment.yaml ... 
 use postman and check if it works!
+
+
+###### Creating Deployment & service for tasks api #########
+1. create Deployment & service files
+2. create a repository on docker-hub and name it tonyhomsi/kub-demo-tasks
+3. go to dir tasks-api. then run:
+docker build -t tonyhomsi/kub-demo-tasks . 
+docker push tonyhomsi/kub-demo-tasks
+
+5. go to kubernetes folder and run:
+kubectl apply -f=tasks-deployment.yaml -f=tasks-service.yaml
+
+kubectl get pods # we got an error crashloopbackoff!!
+to fix that we need to add in the tasks-deployment.yaml:
+- name: TASKS_FOLDER
+  value: tasks #creating an empty folder in the dirc tasks-api
+
+then: 
+kubectl apply -f=tasks-deployment.yaml -f=tasks-service.yaml
+kubectl get pods
+kubectl get services
+now it works
+
+then re-lanuch the service:
+minikube service tasks-service, where as tasks-service getting from the kubectl get services
+
