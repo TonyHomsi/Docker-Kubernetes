@@ -122,5 +122,39 @@ kubectl get services
 now it works
 
 then re-lanuch the service:
-minikube service tasks-service, where as tasks-service getting from the kubectl get services
+, where as tasks-service getting from the kubectl get services
+minikube service tasks-service
+
+
+######### Adding frontend folder ##################
+1. Change the id address of the App.js file according to the given one after running the minikube service tasks-service
+2. then create a repository on docker-hub: tonyhomsi/kub-demo-frontend
+3. docker build -t tonyhomsi/kub-demo-frontend .
+4. docker run -p 80:80 --rm -d tonyhomsi/kub-demo-frontend
+
+go to browser: localhost!
+it works because I already add some extra code in the tasks-app.js:
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  next();
+})
+
+and also add: 
+const fetchTasks = useCallback(function () {
+    fetch('http://127.0.0.1:59529/tasks', {
+      headers: {
+        'Authorization': 'Bearer abc'
+      }
+    })
+
+then build the image again in the tasks-api and push it docker push tonyhomsi/kub-demo-frontend
+kubectl delete -f=tasks-deployment.yaml
+kubectl apply -f=tasks-deployment.yaml
+
+
+
+
+
 
