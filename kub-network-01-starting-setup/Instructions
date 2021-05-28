@@ -15,7 +15,8 @@ Now add user-deployment.yaml file and run:
 kubectl apply -f=users-deployment.yaml
 
 Add User-service.yaml file and run:
-kubectl apply -f=users-service.yaml and to access it you need to run minikube service users-service
+kubectl apply -f=users-service.yaml and to access it you need to run 
+minikube service users-service
 
 
 ###################################### Multiple Container in One Pod ##################################
@@ -86,3 +87,14 @@ kubectl delete -f=users-deployment.yaml
 kubectl apply -f=users-deployment.yaml
 kubectl get pods
 
+########### Using DNS for Pod to Pod Communication ##################
+Edit the user-deployment.yaml file:
+env:
+    - name: AUTH_ADDRESS
+    # value: "10.96.232.143"
+    value: "auth-service.default"
+
+
+then run:
+kubectl apply -f=users-deployment.yaml ... 
+use postman and check if it works!
