@@ -162,3 +162,30 @@ kubectl get pods
 kubectl get service
 minikube service frontend-service
 
+
+############### Using a Reverse Proxy for the Frontend #################
+To aviod hard coding IP address!
+
+Change the configuration in the app.js and nginx.conf:
+in the nginx.config, add the following:
+ location /api {
+    proxy_pass http://127.0.0.1:58575;
+  }
+
+then run:
+docker build -t tonyhomsi/kub-demo-frontend .
+docker push tonyhomsi/kub-demo-frontend
+then go to kubernetes folder:
+kubectl delete -f=frontend-deployment.yaml
+kubectl apply -f=frontend-deployment.yaml
+
+check the localhost in the browser: It doesn't work perfectly: I can't see my tasks, failed.
+
+Now again change the nginx.conf as following:
+location /api/ {
+    proxy_pass http://tasks-service.default:8000/;
+  }
+
+
+go back and repeat the previous steps:
+
